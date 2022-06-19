@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name = "viewport" content = "with = device - width, initital - scale = 1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel = "stylesheet" href = "style.css">
+    </head>
+    <body class = "container">
+        <article class = "start">
+            <h1 class = "mt-5 text-center">나랑 꼭 닮은 세렝게티 동물을 알아보자</h1>
+            <button type="button" class="btn btn-primary mt-5" onclick='start()';>Start</button>
+        </article> 
+       <article class="question">
+            <div class="progress mt-5">
+                <div class="progress-bar" role="progressbar" style="width: calc(100/12*1%)" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <h2 id = "title" class = "text-center mt-5">문제</h2>
+            <input id = "type" type="hidden" value="EI">
+            <button id = "A" type="button" class="btn btn-primary mt-5">Primary</button>
+            <button id = "B" type="button" class="btn btn-primary mt-5">Primary</button>
+            
+        </article>
+        <article class = "result">
+            <span class="border-bottom"></span>
+            <img id = "img" class = "rounded-circle mt-5" src="lion.jpeg" alt="animal">
+            <h2 id = "animal" class = "text-center mt-5">동물이름</h2>
+            <h3 id = "explain" class = "text-center mt-5">설명</h3>
+
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <div class="share addthis_inline_share_toolbox"></div>
+        
+        </article>
+        <input type="hidden" id = "EI" value="0">
+        <input type="hidden" id = "SN" value="0">
+        <input type="hidden" id = "TF" value="0">
+        <input type="hidden" id = "JP" value="0">
+
+       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>        
+       <script>
+            var num = 1;
+            var q = {
+                1: {"title": "문제 1번. <br> 주말에 친구랑 엄청 재미있게 놀고 온 당신, 신발을 벗고 드는 생각은?", "type": "EI", "A": "오늘 재미있게 잘 놀았다!", "B": "오늘 개빡세게 놀았다...!"},
+                2: {"title": "문제 2번. <br> 처음 누군가를 만난 당신. 그 사람과 친해지고 싶다. 당신의 행동은?", "type": "EI", "A": "슬쩍 다가가 말을 걸어본다.", "B": "눈치를 보다가 그 사람이 나에게 다가오게 어떤 행동을 한다."},
+                3: {"title": "문제 3번. <br> 쉬는날 무엇을 하는가?", "type": "EI", "A": "집에 있으면 심심하니 나간다.", "B": "침대 위에서 에너지를 확보한다."},
+                4: {"title": "문제 4번. <br> 아무도 모르게 똥먹기 vs 똥 안먹었는데 전 세계 사람들에게 똥 먹었다고 소문나기", "type": "SN", "A": "아무도 모르게 똥먹기", "B": "똥 안먹었는데 전 세계 사람들에게 똥 먹었다고 소문나기"},
+                5: {"title": "문제 5번. <br> 5천만원으로 주식투자를 한다 당신의 선택은?", "type": "SN", "A": "안전제일 코카콜라는 안 망한다. 코카콜라 5000만원 투자", "B": "조만간 자동차는 전기차로 바뀔 것이다. 테슬라"},
+                6: {"title": "문제 6번. <br> 내가 생각하는 미래는?", "type": "SN", "A": "현재가 없으면 미래가 없다.", "B": "미래를 생각하지 않으면 발전이 없다."},
+                7: {"title": "문제 7번. <br> 갑자기 길거리에서 모르는 사람이 나보고 욕을 한다. 나의 반응은?", "type": "TF", "A": "발끈 하면서 사태를 파악한다.", "B": "그런거 모르겠고 가던길 간다."},
+                8: {"title": "문제 8번. <br> 친구가 주요 주식 정보를 주었다. 나의 선택은?", "type": "TF", "A": "그 회사는 내가 잘 모르니까 패스.", "B": "믿을 만한 친구니까 친구따라 강남 아파트 가즈아!"},
+                9: {"title": "문제 9번. <br> 친구가 교통사고가 났다면서 전화를 한다. 내가 하는 첫 마디는?", "type": "TF", "A": "크게 났냐? 몸은 다친데는 없고? 보험은 들어놨냐?", "B": "괜찮아? 많이 다쳤어? 지금 어디야? 괜찮은거 맞니?"},
+                10: {"title": "문제 10번. <br> 첫 소개팅을 한다. 나는 오늘 무슨 옷을 입는가?", "type": "JP", "A": "어제 날씨, 컨셉을 다 정하고 이미 골라 놨다.", "B": "오늘의 날씨와 기분을 고려하여 입어 준다."},
+                11: {"title": "문제 11번. <br> 친구가 갑자기 여행 티켓을 선물받아서 공짜로 여행을 같이 가자고 한다. 그런데 당장 내일 가야한다. 당신의 선택은?", "type": "JP", "A": "2일 뒤에 중요한 약속이 있어서 갈 수 없다고 한다.", "B": "2일 뒤에 중요한 약속을 어떻게든 미루고 간다고 한다."},
+                12: {"title": "문제 12번. <br> 공부를 하려고 책상에 앉았다. 당신은 어떤 것부터 하는가?", "type": "JP", "A": "오늘 할 일을 정리해서 플래너에 옮겨 적어본다.", "B": "일단 더러운 책상 정리부터 한다."}
+            }
+
+            var result = {
+                "ISTJ": {"animal": "하마", "explain": "하마 설명", "img": "lion.jpg"},
+                "ISFJ": {"animal": "부엉이", "explain": "부엉이 설명", "img": "lion.jpg"},
+                "INFJ": {"animal": "물소", "explain": "물소 설명", "img": "lion.jpg"},
+                "INTJ": {"animal": "치타", "explain": "치타 설명", "img": "lion.jpg"},
+                "ISTP": {"animal": "나무늘보", "explain": "나무늘보 설명", "img": "lion.jpg"},
+                "ISFP": {"animal": "거북이", "explain": "거북이 설명", "img": "lion.jpg"},
+                "INFP": {"animal": "코끼리", "explain": "코끼리 설명", "img": "lion.jpg"},
+                "INTP": {"animal": "침팬지", "explain": "침팬지 설명", "img": "lion.jpg"},
+                "ESTP": {"animal": "악어", "explain": "악어 설명", "img": "lion.jpg"},
+                "ESFP": {"animal": "미어캣", "explain": "미어캣 설명", "img": "lion.jpg"},
+                "ENFP": {"animal": "멋쟁이 사자", "explain": "멋쟁이 사자 설명", "img": "lion.jpg"},
+                "ENTP": {"animal": "태양새", "explain": "태양새 설명", "img": "lion.jpg"},
+                "ESTJ": {"animal": "기린", "explain": "기린 설명", "img": "lion.jpg"},
+                "ESFJ": {"animal": "고릴라", "explain": "고릴라 설명", "img": "lion.jpg"},
+                "ENFJ": {"animal": "카피바라", "explain": "카피바라 설명", "img": "lion.jpg"},
+                "ENTJ": {"animal": "호랑이", "explain": "호랑이 설명", "img": "lion.jpg"},
+            }   
+            function start(){
+                $(".start").hide();
+                $(".question").show();
+                next();
+            }
+            $("#A").click(function() {
+                var type = $("#type").val();
+                var preValue = $("#" + type).val();
+                $("#" + type).val(parseInt(preValue) + 1);
+                next();
+            })
+            $("#B").click(function(){
+                next();
+            })
+            function next(){
+                if (num == 13){
+                    $(".question").hide();
+                    $(".result").show();
+                    var mbti = "";
+                    ($("#EI").val() < 2) ? mbti += "I" : mbti += "E";
+                    ($("#SN").val() < 2) ? mbti += "N" : mbti += "S";
+                    ($("#TF").val() < 2) ? mbti += "F" : mbti += "T";
+                    ($("#JP").val() < 2) ? mbti += "P" : mbti += "J";
+                    $("#img").attr("src", result[mbti]["img"]);
+                    $("animal").html(result[mbti]["animal"]);
+                    $("#explain").html(result[mbti]["explain"]);
+
+                }else{
+                    $(".progress-bar").attr('style', 'width: calc(100/12*'+num+'%)');
+                    $("#title").html(q[num]["title"]);
+                    $("#type").val(q[num]["type"]);
+                    $("#A").html(q[num]["A"]);
+                    $("#B").html(q[num]["B"]);
+                    num++;
+                }
+                
+            }
+        </script>
+        <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62ac29d94837af58"></script>
+    </body>
+</html>

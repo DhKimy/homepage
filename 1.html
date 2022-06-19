@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자소서 글자수 계산기</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style>
+        h1 {
+            text-align: center;
+            margin: 30px auto;
+
+        }
+        #count {
+            float: right;
+        }
+        
+        h4 {
+            margin-top: 200px;
+            font-size: small;
+        }
+    </style>
+</head>
+<body class="is-preload">
+    <section class = 'container'>
+        <div id="wrapper">
+            <header id="header" class="alt">
+                <a href="index.html" class="logo"><strong>ramanste</strong> <span>by Code Lion</span></a>
+                <nav>
+                    <a href="#menu">리스트</a>
+                </nav>
+            </header>
+            <nav id="menu">
+                <ul class="links">
+                    <li><a href="index.html">홈 화면</a></li>
+                    <li><a href="landing.html">MBTI로 알아보는 나에게 맞는 동물</a></li>
+                    <li><a href="generic.html">로또 번호 추출기</a></li>
+                    <li><a href="elements.html">기타 프로젝트</a></li>
+                </ul>
+            </nav>
+            
+            <h1>자기소개서 글자수세기</h1>
+
+            <h4>아래 박스에 텍스트를 붙여넣으세요</h4>
+            <textarea class="form-control" rows="3" id="jasoseol" onkeydown="counter();"></textarea>
+            <span id="count">(0/200)</span>
+            <script>
+                function counter() {
+                    var content = document.getElementById('jasoseol').value;
+                    if (content.length > 500) {
+                        content = content.substring(0,500)
+                        document.getElementById('jasoseol').value = content
+                    }
+                    document.getElementById('count').innerHTML = '(' + content.length + '/500)';
+                }
+                counter();
+            </script>
+            <footer id="footer">
+                <div class="inner">
+                     <ul class="icons">
+                        <li><a href="https://www.instagram.com/dh_yz/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="https://github.com/DhKimy/" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                        <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+                    </ul>
+                    <ul class="copyright">
+                        <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+                    </ul>
+                </div>
+            </footer>
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.scrolly.min.js"></script>
+            <script src="assets/js/jquery.scrollex.min.js"></script>
+            <script src="assets/js/browser.min.js"></script>
+            <script src="assets/js/breakpoints.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <script src="assets/js/main.js"></script>
+        </div>
+    </section>
+</body>
+</html>

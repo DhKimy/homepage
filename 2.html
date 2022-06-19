@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>스타크래프트</title>
+    <style>
+        .background {
+            position: relative;
+            background-image: url('background.png');
+            background-size: 500px 330px;
+            width: 500px;
+            height: 330px;
+        }
+        #drone {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 100px;
+            left: 60px;
+        }
+        #bunker {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 80px;
+            right: 20px;
+        }
+        #spit {
+            display: none;
+            position: absolute;
+            top: 140px;
+            left: 150px;
+            width: 50px;
+            height: 30px;
+            z-index: 2;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+    <div id="wrapper">
+        <header id="header" class="alt">
+            <a href="index.html" class="logo"><strong>ramanste</strong> <span>by Code Lion</span></a>
+            <nav>
+                <a href="#menu">리스트</a>
+            </nav>
+        </header>
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="index.html">홈 화면</a></li>
+                <li><a href="landing.html">MBTI로 알아보는 나에게 맞는 동물</a></li>
+                <li><a href="generic.html">로또 번호 추출기</a></li>
+                <li><a href="elements.html">기타 프로젝트</a></li>
+            </ul>
+        </nav>
+        
+        <h1 id='hp'>HP: 10</h1>
+        <p>드론을 클릭하면 침이 발사됩니다.</p>
+        <div class='background'>
+            <img id='drone' src="images/drone.png" alt="drone">
+            <img id='spit' src="images/spit.png" alt="spit">
+            <img id='bunker' src="images/bunker.png" alt="bunker">
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="https://www.instagram.com/dh_yz/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="https://github.com/DhKimy/" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+        </footer>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+    <script>
+        var hp = 10
+        $('#drone').click(function() {
+            $('#spit').fadeIn();
+            $('#spit').animate({'left': '+=250px'});
+            $('#spit').fadeOut(function(){
+                hp = hp - 1;
+                $('#hp').text('HP: ' + hp);
+                if (hp == 0) {
+                    $('#bunker').fadeOut();
+                    $('#drone').off('click');
+                    alert('드론이 이겼습니다!');
+                }
+            });
+            $('#spit').css({left: 150});
+        });
+        
+        
+    </script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
